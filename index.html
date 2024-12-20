@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Your Learning Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="showHomePage()">EduLearn</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#courses">Courses</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" onclick="showLoginModal()">Login</button>
+                <button class="btn btn-primary" onclick="showSignupModal()">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="home-page">
+        <section class="hero">
+            <h1>Learn Without Limits</h1>
+            <p>Access world-class education from anywhere, anytime.</p>
+            <button class="btn btn-primary" onclick="exploreCourses()">Explore Courses</button>
+        </section>
+
+        <section class="featured-courses">
+            <h2>Featured Courses</h2>
+            <div class="course-grid" id="courseGrid">
+                <!-- Courses will be dynamically added here -->
+            </div>
+        </section>
+    </div>
+
+    <div class="course-details" id="courseDetails">
+        <div class="course-header">
+            <div class="course-info">
+                <h1 id="courseTitle">Course Title</h1>
+                <p id="courseInstructor">Instructor</p>
+                <p id="courseRating">Rating</p>
+                <button class="btn btn-primary" onclick="startCourse()">Start Learning</button>
+            </div>
+        </div>
+        <div class="curriculum">
+            <h2>Course Curriculum</h2>
+            <div id="curriculumList">
+                <!-- Curriculum items will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="learning-interface" id="learningInterface">
+        <div class="video-container">
+            [Video Player Placeholder]
+        </div>
+        <div class="lesson-content">
+            <div class="main-content">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab(this, 'overview')">Overview</div>
+                    <div class="tab" onclick="switchTab(this, 'resources')">Resources</div>
+                    <div class="tab" onclick="switchTab(this, 'discussion')">Discussion</div>
+                </div>
+                <div id="lessonContent">
+                    <h2 id="lessonTitle">Lesson Title</h2>
+                    <div id="lessonDescription">
+                        Lesson description and content will appear here.
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar">
+                <h3>Course Progress</h3>
+                <div id="progressBar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="notes-section">
+                    <h3>Notes</h3>
+                    <textarea class="notes-input" placeholder="Take notes here..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
