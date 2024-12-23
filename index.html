@@ -7,6 +7,63 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="auth-container">
+                <!-- Login Form -->
+                <div id="loginForm" class="auth-form">
+                    <h2>Login</h2>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                    <p class="switch-text">
+                        Don't have an account? 
+                        <a href="#" onclick="switchForm('signup')">Sign up</a>
+                    </p>
+                </div>
+    
+                <!-- Signup Form -->
+                <div id="signupForm" class="auth-form hide">
+                    <h2>Sign Up</h2>
+                    <form onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
+                    <p class="switch-text">
+                        Already have an account? 
+                        <a href="#" onclick="switchForm('login')">Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <nav>
             <div class="logo" onclick="showHomePage()">EduLearn</div>

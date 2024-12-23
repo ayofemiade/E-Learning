@@ -328,3 +328,163 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+// Store for logged-in user data
+let currentUser = null;
+
+// Show login modal
+function showLoginModal() {
+    const modal = document.getElementById('authModal');
+    switchForm('login');
+    modal.style.display = 'block';
+}
+
+// Show signup modal
+function showSignupModal() {
+    const modal = document.getElementById('authModal');
+    switchForm('signup');
+    modal.style.display = 'block';
+}
+
+// Switch between login and signup forms
+function switchForm(formType) {
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    
+    if (formType === 'login') {
+        loginForm.classList.remove('hide');
+        signupForm.classList.add('hide');
+    } else {
+        loginForm.classList.add('hide');
+        signupForm.classList.remove('hide');
+    }
+}
+
+// Handle login form submission
+function handleLogin(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    // Here you would typically make an API call to verify credentials
+    // For demo purposes, we'll simulate a successful login
+    if (email && password) {
+        currentUser = {
+            email: email,
+            name: email.split('@')[0] // Using email username as display name
+        };
+        
+        updateAuthUI();
+        closeModal();
+        showSuccessMessage('Successfully logged in!');
+    }
+}
+
+// Handle signup form submission
+function handleSignup(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    
+    // Basic validation
+    if (password !== confirmPassword) {
+        showError('Passwords do not match');
+        return;
+    }
+    
+    // Here you would typically make an API call to create the account
+    // For demo purposes, we'll simulate a successful signup
+    if (name && email && password) {
+        currentUser = {
+            name: name,
+            email: email
+        };
+        
+        updateAuthUI();
+        closeModal();
+        showSuccessMessage('Account created successfully!');
+    }
+}
+
+// Close the modal
+function closeModal() {
+    const modal = document.getElementById('authModal');
+    modal.style.display = 'none';
+    clearForms();
+}
+
+// Clear form inputs
+function clearForms() {
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('signupName').value = '';
+    document.getElementById('signupEmail').value = '';
+    document.getElementById('signupPassword').value = '';
+    document.getElementById('confirmPassword').value = '';
+}
+
+// Show error message
+function showError(message) {
+    // Remove any existing error messages
+    const existingError = document.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Create and show new error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    
+    const activeForm = document.querySelector('.auth-form:not(.hide)');
+    activeForm.querySelector('form').appendChild(errorDiv);
+}
+
+// Show success message
+function showSuccessMessage(message) {
+    alert(message); // For demo purposes, you might want to replace this with a custom toast notification
+}
+
+// Update UI based on authentication state
+function updateAuthUI() {
+    const authButtons = document.querySelector('.auth-buttons');
+    
+    if (currentUser) {
+        authButtons.innerHTML = `
+            <span class="user-name">Welcome, ${currentUser.name}</span>
+            <button class="btn btn-secondary" onclick="handleLogout()">Logout</button>
+        `;
+    } else {
+        authButtons.innerHTML = `
+            <button class="btn btn-secondary" onclick="showLoginModal()">Login</button>
+            <button class="btn btn-primary" onclick="showSignupModal()">Sign Up</button>
+        `;
+    }
+}
+
+// Handle logout
+function handleLogout() {
+    currentUser = null;
+    updateAuthUI();
+    showSuccessMessage('Successfully logged out!');
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Close modal when clicking outside
+    const modal = document.getElementById('authModal');
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+    
+    // Close modal when clicking close button
+    const closeBtn = document.querySelector('.close');
+    closeBtn.onclick = closeModal;
+});
